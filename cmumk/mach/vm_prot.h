@@ -5,6 +5,14 @@
 
 #include <mach/types.h> 
 
+#ifndef _AC
+#ifdef __ASSEMBLY__
+#define _AC(X,Y)	X
+#else
+#define _AC(X,Y)	(X##Y)
+#endif
+#endif
+
 typedef int		vm_prot_t;
 #define	VM_PROT_NONE	((vm_prot_t) 0x00)
 
