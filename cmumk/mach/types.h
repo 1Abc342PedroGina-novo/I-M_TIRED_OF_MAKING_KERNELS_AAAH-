@@ -36,7 +36,7 @@ typedef unsigned long long  ULONGLONG;
 #endif
 
 #define BYTE_SIZE	8	/* byte size in bits */
-
+#define PAGE_MASK   (~(PAGE_SIZE - 1))
 #define btop(x)		(((unsigned)(x)) >> PAGE_SIZE)
 #define ptob(x)		(((unsigned)(x)) << PAGE_SHIFT)
 
