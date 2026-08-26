@@ -134,5 +134,12 @@ typedef struct { pmdval_t pmd; } pmd_t;
 # define VMALLOC_START		vmalloc_base
 # define VMALLOC_SIZE_TB	(pgtable_l5_enabled() ? VMALLOC_SIZE_TB_L5 : VMALLOC_SIZE_TB_L4)
 # define VMEMMAP_START		vmemmap_base
+typedef struct pgprot { pgprotval_t pgprot; } pgprot_t;
+
+typedef struct { pgdval_t pgd; } pgd_t;
+
+typedef struct { p4dval_t p4d; } p4d_t;
+
+typedef struct { pudval_t pud; } pud_t;
 
 #endif
