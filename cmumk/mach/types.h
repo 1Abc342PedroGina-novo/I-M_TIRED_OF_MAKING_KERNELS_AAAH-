@@ -29,15 +29,15 @@ typedef unsigned long long  ULONGLONG;
 
 #ifdef __x86_64__
 #define PAGE_SIZE  4096
-#define PAGE_SHIT  12
+#define PAGE_SHIFT  12
 #elif __aarch64__
 #define PAGE_SIZE  16384
-#define PAGE_SHIT  14
+#define PAGE_SHIFT  14
 #endif
 
 #define BYTE_SIZE	8	/* byte size in bits */
 #define PAGE_MASK   (~(PAGE_SIZE - 1))
-#define btop(x)		(((unsigned)(x)) >> PAGE_SIZE)
+#define btop(x)		(((unsigned)(x)) >> PAGE_SHIFT)
 #define ptob(x)		(((unsigned)(x)) << PAGE_SHIFT)
 
 #define round_page(x)	((((unsigned)(x)) + PAGE_SIZE - 1) & \
