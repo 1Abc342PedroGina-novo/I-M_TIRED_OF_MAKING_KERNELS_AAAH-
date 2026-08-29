@@ -42,11 +42,11 @@ struct vm_object {
 	 * rounding the size of the vm_object element to the nearest
 	 * 64 byte size before creating the zone.
 	 */
-	vm_page_queue_head_t    memq;           /* Resident memory - must be first */
+	list_head    memq;           /* Resident memory - must be first */
 	lck_rw_t                Lock;           /* Synchronization */
 
 	union {
-		vm_object_size_t  vou_size;     /* Object size (only valid if internal) */
+		unsigned long vou_size;     /* Object size (only valid if internal) */
 		int               vou_cache_pages_to_scan;      /* pages yet to be visited in an
 		                                                 * external object in cache
 		                                                 */
@@ -71,11 +71,11 @@ struct vm_object {
 	uint32_t                vo_inherit_copy_none:1,
 	    __vo_unused_padding:31;
 	struct vm_object        *shadow;        /* My shadow */
-	memory_object_t         pager;          /* Where to get data */
+	struct vm_object         pager;          /* Where to get data */
 
 	union {
-		vm_object_offset_t vou_shadow_offset;   /* Offset into shadow */
-		clock_sec_t     vou_cache_ts;   /* age of an external object
+		uint64 vou_shadow_offset;   /* Offset into shadow */
+		uint64     vou_cache_ts;   /* age of an external object
 		                                 * present in cache
 		                                 */
 		task_t          vou_owner;      /* If the object is purgeable
@@ -84,10 +84,10 @@ struct vm_object {
 		                                 */
 	} vo_un2;
 
-	vm_object_offset_t      paging_offset;  /* Offset into memory object */
-	memory_object_control_t pager_control;  /* Where data comes back */
+	uint64      paging_offset;  /* Offset into memory object */
+	uint64 pager_control;  /* Where data comes back */
 
-	memory_object_copy_strategy_t
+	uint64
 	    copy_strategy;                      /* How to handle data copy */
 
 	/*
@@ -97,9 +97,9 @@ struct vm_object {
 	 * Since we never enforced any limit there, let's give them 32 bits
 	 * for backwards compatibility's sake.
 	 */
-	uint16_t                paging_in_progress;
-	uint16_t                vo_size_delta;
-	uint32_t                activity_in_progress;
+	uint16                paging_in_progress;
+	uint16                vo_size_delta;
+	uint32                activity_in_progress;
 
 	/* The memory object ports are
 	 * being used (e.g., for pagein
@@ -203,7 +203,7 @@ struct vm_object {
 	__object1_unused_bits:1;
 #endif /* FBDP_DEBUG_OBJECT_NO_PAGER */
 
-	queue_chain_t           cached_list;    /* Attachment point for the
+	list_head           cached_list;    /* Attachment point for the
 	                                         * list of objects cached as a
 	                                         * result of their can_persist
 	                                         * value
