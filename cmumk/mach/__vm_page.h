@@ -146,7 +146,7 @@ vm_object_t	object;		/* which object am I in (O&P) */
 			unusual:1,	/* Page is absent, error, restart or
 					   page locked */
 	  		discard_request:1,/* a memory_object_discard_request()
-					   * has been sent */s
+					   * has been sent */
 			:0;
 
 	vm_offset_t	phys_addr;	/* Physical address of page, passed
