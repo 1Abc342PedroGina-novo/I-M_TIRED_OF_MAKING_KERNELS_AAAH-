@@ -37,12 +37,12 @@ typedef unsigned long long  ULONGLONG;
 
 #define BYTE_SIZE	8	/* byte size in bits */
 #define PAGE_MASK   (~(PAGE_SIZE - 1))
-#define btop(x)		(((unsigned)(x)) >> PAGE_SHIFT)
-#define ptob(x)		(((unsigned)(x)) << PAGE_SHIFT)
+#define btop(x)		(((unsigned long long)(x)) >> PAGE_SHIFT)
+#define ptob(x)		(((unsigned long long)(x)) << PAGE_SHIFT)
 
-#define round_page(x)	((((unsigned)(x)) + PAGE_SIZE - 1) & \
+#define round_page(x)	((((uint64)(x)) + PAGE_SIZE - 1) & \
 					~(PAGE_SIZE-1))
-#define runc_page(x)	(((unsigned)(x)) & ~(PAGE_SIZE-1))
+#define runc_page(x)	(((uint64)(x)) & ~(PAGE_SIZE-1))
 
 typedef	natural_t	vm_offset_t;
 
