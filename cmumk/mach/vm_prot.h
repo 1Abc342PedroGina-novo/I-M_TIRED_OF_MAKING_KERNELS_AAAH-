@@ -68,7 +68,7 @@ typedef struct { pmdval_t pmd; } pmd_t;
 # ifdef __i386__ //x86_64 arch
 # define PGDIR_SHIFT	39
 # elif __aarch64__
-# define PGDIR_SHFIT 47
+# define PGDIR_SHIFT 47
 # endif
 #define PTRS_PER_PGD	512
 
