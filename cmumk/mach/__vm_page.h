@@ -37,7 +37,7 @@ struct vm_page {
 
       struct address_space *mapping;
 			union {
-				pgoff_t __folio_index;		/* Our offset within mapping. */
+				uint64 __folio_index;		/* Our offset within mapping. */
 				unsigned long share;	/* share count for fsdax */
 			};
 
@@ -49,7 +49,7 @@ struct vm_page {
 			 * page_pool allocated pages.
 			 */
 			unsigned long pp_magic;
-			struct page_pool *pp;
+			struct vm_page *pp;
 			unsigned long _pp_mapping_pad;
 			unsigned long dma_addr;
 			atomic_long_t pp_ref_count;
