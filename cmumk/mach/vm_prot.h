@@ -65,7 +65,7 @@ typedef struct { pmdval_t pmd; } pmd_t;
 /*
  * PGDIR_SHIFT determines what a top-level page table entry can map
  */
-# ifdef __i386__ //x86_64 arch
+# ifdef __x86_64__ //x86_64 arch
 # define PGDIR_SHIFT	39
 # elif __aarch64__
 # define PGDIR_SHIFT 47
