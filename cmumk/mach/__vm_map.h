@@ -142,13 +142,13 @@ struct anon_vma *anon_vma;	/* Serialized by page_table_lock */
 
 };
 
-typedef struct vm_map	*vm_map_t, *vm_map;
+typedef struct vm_map	vm_map_t, vm_map;
 
 struct vm_operations_struct {
-	read(vm_map	*map);
-	write(vm_map *map, struct file	*file);
-	open(vm_map		*map);
-	mswitch(pmap_t *p);	
+    int (*read)(vm_map_t map);                    // Retorna int
+    int (*write)(vm_map_t map, struct file *file); // Retorna int
+    int (*open)(vm_map_t map);                    // Retorna int
+    void (*mswitch)(pmap_t p);                    // Retorna void, Memory Switch
 };
 
 #endif
