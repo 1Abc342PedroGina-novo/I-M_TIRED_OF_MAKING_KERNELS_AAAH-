@@ -26,6 +26,9 @@ typedef long  int64;
 typedef unsigned long  uint64;
 typedef long long  LONGLONG;
 typedef unsigned long long  ULONGLONG;
+typedef unsigned short WORD;  // NOLINT(runtime/int)
+typedef WORD UWORD;
+typedef WORD ATOM;
 
 #ifdef __x86_64__
 #define PAGE_SIZE  4096
