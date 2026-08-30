@@ -3,7 +3,7 @@
 #include <mach/types.h>
 #include <sys/types.h>
 #include <mach/stdbool.h>
-
+#define VMP_CS_BITS 4
 typedef struct pv_entry {
 	/* Linked list to the next mapping of the physical page. */
 	struct pv_entry *pve_next;
@@ -61,7 +61,6 @@ struct page_arm64 {
 		uint8                 vmp_iopl_wired:1;   /* page has been wired for I/O UPL (O&P) */
 		uint8                 vmp_unmodified_ro:1;/* Tracks if an anonymous page is modified after a decompression (O&P).*/
 		uint8                 __vmp_reserved1:1;
-#endif
 		uint8                 __vmp_reserved2:1;
 	};
 	unsigned int    vmp_busy:1,           /* page is in transit (O) */
