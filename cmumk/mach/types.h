@@ -13,6 +13,7 @@
 
 #ifndef MACH_TYPES_H
 #define MACH_TYPES_H
+typedef struct { unsigned long v; } freeptr_t;
 
 typedef unsigned int	natural_t;
 typedef int		integer_t;
