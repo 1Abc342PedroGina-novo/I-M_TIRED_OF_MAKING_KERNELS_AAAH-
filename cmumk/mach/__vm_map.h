@@ -4,6 +4,15 @@
 typedef struct {
 	unsigned long val;
 } swp_entry_t;
+struct anon_vma {
+	struct anon_vma *root;		
+atomic_t refcount;
+	unsigned long num_children;
+		unsigned long num_active_vmas;
+	struct anon_vma *parent;	/* Parent of this anon_vma */
+
+	struct rb_root_cached rb_root;
+};
 
 #include <mach/types.h>
 #include <kern/kobject.h>
