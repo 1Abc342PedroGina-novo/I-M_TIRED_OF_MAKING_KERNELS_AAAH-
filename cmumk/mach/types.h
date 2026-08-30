@@ -68,4 +68,11 @@ struct _LIST_ENTRY
 
 typedef struct _LIST_ENTRY	*queue_head_t, list_head;
 
+#define DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
+
+#define BITS_TO_LONGS(nr)    DIV_ROUND_UP(nr, 64)
+
+#define DECL_IMAGE(name, bits) \
+    unsigned long name[BITS_TO_LONGS(bits)]
+
 #endif
