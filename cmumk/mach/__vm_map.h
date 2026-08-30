@@ -4,6 +4,9 @@
 typedef struct {
 	unsigned long val;
 } swp_entry_t;
+
+#include <linux/types.h>
+
 struct anon_vma {
 	struct anon_vma *root;		
 atomic_t refcount;
