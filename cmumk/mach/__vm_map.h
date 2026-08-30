@@ -26,8 +26,6 @@ atomic_t refcount;
 #include <linux/rbtree.h>
 #include <linux/refcount_types.h>
 
-typedef struct { unsigned long v; } freeptr_t;
-
 typedef union vm_map_object {
 	struct vm_object	*vm_object;	/* object object */
 	struct vm_map		*sub_map;	/* belongs to another map */
@@ -142,16 +140,17 @@ struct anon_vma *anon_vma;	/* Serialized by page_table_lock */
 
 };
 
-typedef struct vm_map	vm_map_t, vm_map;
+typedef struct vm_map vm_map_t;  // Struct
+typedef vm_map_t *vm_map_ptr_t;  // Ponteiro
 
 struct vm_operations_struct {
-    int (*read)(vm_map_t map);                    // Retorna int
-    int (*write)(vm_map_t map, struct file *file); // Retorna int
-    int (*open)(vm_map_t map);                    // Retorna int
+    int (*read)(vm_map_ptr_t map);                    // Retorna int
+    int (*write)(vm_map_ptr_t map, struct file *file); // Retorna int
+    int (*open)(vm_map_ptr_t map);                    // Retorna int
     void (*mswitch)(pmap_t p);                    // Retorna void, Memory Switch
 	int (*mapped)(unsigned long start, unsigned long end, pgoff_t pgoff,
 		      const struct file *file, void **vm_private_data);
-	int (*memory_view)(unsigned long memory_t, pmap_t	phys, vm_map_t		map);
+	int (*memory_view)(unsigned long memory_t, pmap_t	phys, vm_map_ptr_t		map);
 };
 typedef struct vm_operations_struct vm_ops_t;
 #endif
