@@ -14,6 +14,11 @@
 #ifndef MACH_TYPES_H
 #define MACH_TYPES_H
 typedef struct { unsigned long v; } freeptr_t;
+/*
+ * The type of an index into the pagecache.
+ */
+#define pgoff_t unsigned long
+/* é define para que o montador ou código de uma arquitertura especifica  estender essa definição caso uma plataforma exótica precise tratar índices do pagecache com um tamanho diferente. */
 typedef enum {
 	GFP_KERNEL,
 	GFP_ATOMIC,
