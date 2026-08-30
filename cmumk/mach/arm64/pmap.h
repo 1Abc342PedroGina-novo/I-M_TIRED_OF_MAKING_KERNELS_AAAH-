@@ -1,6 +1,8 @@
 #ifndef MACH_ARM64_PMAP_H
 #define MACH_ARM64_PMAP_H
 #include <mach/types.h>
+#include <sys/types.h>
+#include <mach/stdbool.h>
 
 typedef struct pv_entry {
 	/* Linked list to the next mapping of the physical page. */
@@ -91,4 +93,57 @@ struct page_arm64 {
 	    vmp_written_by_kernel:1;          /* page was written by kernel (i.e. decompressed) */
 };
 
+struct pmap {
+	/* Pointer to the root translation table. */
+	uint64 *tte;
+	uint64 ttep;
+	uint64 min;
+	uint64 max;
+	vm_size_t nested_region_addr;
+	vm_offset_t  nested_region_size;
+	vm_offset_t  nested_region_true_start;
+	vm_offset_t  nested_region_true_end;
+	union {
+		struct pmap      *nested_pmap;
+	};
+		union {
+		/**
+		 * Represents the address space identifier (ASID) for this pmap.
+		 * The value 0 is reserved for the kernel pmap; this field will
+		 * also be 0 for nested pmaps as those pmaps are never directly
+		 * activated on a CPU.  This represents a virtual ASID that
+		 * is used to globally identify an address space on
+		 * the system.  Depending upon hardware configuration, this
+		 * identifier may have a 1:1 correspondence with the hardware
+		 * ASID.
+		 */
+		uint16_t asid;
+
+		/**
+		 * Represents the virtual machine identifier (VMID) for this pmap.
+		 * The value 0 is reserved.
+		 */
+		uint16_t vmid;
+	};
+		int pmap_pid;
+	char pmap_procname[17];
+		bool reserved0;
+
+	bool pmap_vm_map_cs_enforced;
+
+	bool reserved1;
+	unsigned int reserved2;
+	unsigned int reserved3;
+	bool reserved4;
+	
+	/* Whether the No-Execute functionality is enabled. */
+	bool nx_enabled;
+
+	/* Whether this pmap represents a 64-bit address space. */
+	bool is_64bit;
+
+	bool disable_jop;
+	bool reserved5;
+	bool reserved6;
+};
 #endif
