@@ -149,6 +149,9 @@ struct vm_operations_struct {
     int (*write)(vm_map_t map, struct file *file); // Retorna int
     int (*open)(vm_map_t map);                    // Retorna int
     void (*mswitch)(pmap_t p);                    // Retorna void, Memory Switch
+	int (*mapped)(unsigned long start, unsigned long end, pgoff_t pgoff,
+		      const struct file *file, void **vm_private_data);
+	int (*memory_view)(unsigned long memory_t, pmap_t	phys, vm_map_t		map);
 };
-
+typedef struct vm_operations_struct vm_ops_t;
 #endif
