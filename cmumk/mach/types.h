@@ -14,7 +14,12 @@
 #ifndef MACH_TYPES_H
 #define MACH_TYPES_H
 typedef struct { unsigned long v; } freeptr_t;
-
+typedef enum {
+	GFP_KERNEL,
+	GFP_ATOMIC,
+	__GFP_HIGHMEM,
+	__GFP_HIGH
+} gfp_t;
 typedef unsigned int	natural_t;
 typedef int		integer_t;
 typedef char  int8;
