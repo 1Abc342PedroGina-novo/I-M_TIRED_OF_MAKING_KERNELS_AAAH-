@@ -74,5 +74,10 @@ typedef struct _LIST_ENTRY	*queue_head_t, list_head;
 
 #define DECL_IMAGE(name, bits) \
     unsigned long name[BITS_TO_LONGS(bits)]
+#define NUM_VMA_FLAG_BITS BITS_PER_LONG
+
+typedef struct {
+    DECL_IMAGE(__vma_flags, NUM_VMA_FLAG_BITS);
+} vma_flags_t;
 
 #endif
