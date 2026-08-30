@@ -66,4 +66,6 @@ struct _LIST_ENTRY
     struct _LIST_ENTRY* Blink;                                              //0x8
 }; 
 
+typedef struct _LIST_ENTRY	*queue_head_t, list_head;
+
 #endif
